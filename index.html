@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 生涯工作台 · 四川大学人工智能学院 2026 级</title>
+<meta name="description" content="AI 生涯工作台 —— 四年路线、12 个月计划、项目阶梯与自评打卡，单文件离线可用，进度只存本机。">
+<link rel="icon" type="image/png" href="favicon.ico">
+<style>
+  :root{
+    --bg0:#070c16; --bg1:#0e1626; --bg2:#141f36;
+    --line:#21304c; --line2:#2e3f60;
+    --fg:#e9eefb; --fg2:#a7bad7; --fg3:#6d81a2;
+    --acc:#4f8cff; --acc2:#80b0ff; --ok:#2ed3a0;
+    --mono:"Cascadia Code","JetBrains Mono",Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--fg); background:var(--bg0);
+    font:15px/1.7 "Segoe UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; z-index:-1;
+    background:
+      radial-gradient(760px 420px at 50% -8%, rgba(79,140,255,.20), transparent 70%),
+      radial-gradient(600px 380px at 88% 8%, rgba(199,146,234,.10), transparent 70%),
+      var(--bg0);
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+  a{color:var(--acc2);text-decoration:none}
+
+  /* ---------- 顶栏 ---------- */
+  header.top{display:flex;align-items:center;gap:12px;padding:26px 0 0}
+  .logo{
+    width:34px;height:34px;border-radius:10px;flex:0 0 auto;
+    background:linear-gradient(135deg,#4f8cff,#2f6be0);
+    display:grid;place-items:center;font-size:17px;line-height:1;
+    box-shadow:0 6px 18px rgba(79,140,255,.35);
+  }
+  .brand{font-weight:700;letter-spacing:.3px}
+  .brand small{display:block;font-weight:400;font-size:11.5px;color:var(--fg3);letter-spacing:0}
+  .top .spacer{flex:1}
+  .chip{
+    font-size:12px;color:var(--fg2);border:1px solid var(--line);
+    background:rgba(20,31,54,.7);border-radius:99px;padding:4px 11px;white-space:nowrap;
+  }
+  .chip i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ok);margin-right:6px;vertical-align:1px}
+
+  /* ---------- 主视觉 ---------- */
+  .hero{padding:74px 0 52px;text-align:center}
+  .hero h1{
+    font-size:clamp(28px,4.6vw,44px);line-height:1.28;margin:0 0 14px;
+    letter-spacing:-.4px;font-weight:700;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg,#80b0ff,#c792ea);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{font-size:16px;color:var(--fg2);margin:0 auto;max-width:31em}
+  .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;border-radius:12px;
+    padding:15px 30px;font-size:16px;font-weight:650;border:1px solid transparent;
+    transition:transform .15s ease, filter .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{
+    background:linear-gradient(135deg,#4f8cff,#2f6be0);color:#fff;
+    box-shadow:0 12px 30px rgba(79,140,255,.34);border-color:#6ea0ff;
+  }
+  .btn.primary:hover{filter:brightness(1.1)}
+  .btn.ghost{background:rgba(20,31,54,.75);color:var(--fg);border-color:var(--line2)}
+  .meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+  .meta span{font-size:13px;color:var(--fg3);border:1px dashed var(--line2);border-radius:8px;padding:4px 10px}
+
+  /* ---------- 价值三栏 ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-bottom:8px}
+  .card{
+    background:linear-gradient(180deg,var(--bg2),var(--bg1));
+    border:1px solid var(--line);border-radius:14px;padding:24px 22px;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .card:hover{border-color:var(--line2);transform:translateY(-2px)}
+  .card .ico{font-size:20px;line-height:1}
+  .card h3{font-size:16px;margin:14px 0 8px;font-weight:650}
+  .card p{margin:0;color:var(--fg2);font-size:14px}
+  .card p b{color:var(--fg);font-weight:600}
+
+  /* ---------- 预览 ---------- */
+  section.blk{padding-top:56px}
+  .blk .head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+  .blk h2{font-size:19px;margin:0;font-weight:650}
+  .blk .head .note{font-size:13px;color:var(--fg3)}
+  .shots{display:grid;grid-template-columns:1.75fr .75fr;gap:18px;align-items:start;justify-items:center}
+  .shot{
+    display:block;width:100%;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    background:var(--bg1);transition:border-color .15s ease, transform .15s ease;
+  }
+  .shot.phone{max-width:270px}
+  .shot:hover{border-color:var(--acc);transform:translateY(-2px)}
+  .shot img{display:block;width:100%;height:auto}
+  .shot .cap{padding:10px 14px;font-size:12.5px;color:var(--fg3);border-top:1px solid var(--line)}
+
+  /* ---------- 三步 ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+  .step{
+    background:rgba(20,31,54,.55);border:1px solid var(--line);border-radius:14px;padding:22px;
+  }
+  .step::before{
+    counter-increment:s;content:counter(s);
+    display:grid;place-items:center;width:26px;height:26px;border-radius:8px;
+    background:rgba(79,140,255,.16);border:1px solid rgba(79,140,255,.45);color:var(--acc2);
+    font:600 13px/1 var(--mono);
+  }
+  .step h4{margin:12px 0 6px;font-size:15px;font-weight:650}
+  .step p{margin:0;font-size:13.5px;color:var(--fg2)}
+  code{
+    font-family:var(--mono);font-size:12.5px;background:#0b1526;
+    border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:#9dc0ff;
+  }
+
+  /* ---------- 折叠 ---------- */
+  details{
+    background:linear-gradient(180deg,var(--bg2),var(--bg1));
+    border:1px solid var(--line);border-radius:14px;padding:0 22px;
+  }
+  details+details{margin-top:12px}
+  summary{
+    cursor:pointer;list-style:none;padding:18px 0;font-size:15px;font-weight:600;
+    display:flex;align-items:center;gap:10px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";margin-left:auto;color:var(--fg3);font-weight:400}
+  details[open] summary::after{content:"－"}
+  details .body{padding:0 0 20px;color:var(--fg2);font-size:14px}
+  details .body p{margin:0 0 10px}
+  details .body p:last-child{margin-bottom:0}
+  .files{list-style:none;margin:0;padding:0}
+  .files li{display:flex;gap:14px;padding:8px 0;border-top:1px dashed var(--line)}
+  .files li:first-child{border-top:0}
+  .files .n{flex:0 0 240px;color:var(--fg);font-weight:600;font-size:13.5px}
+  .files .d{color:var(--fg3);font-size:13px}
+
+  footer{margin:64px 0 40px;text-align:center;color:var(--fg3);font-size:12.5px;line-height:2}
+  footer b{color:var(--fg2);font-weight:600}
+
+  @media(max-width:760px){
+    .hero{padding:48px 0 40px}
+    .cards,.steps{grid-template-columns:1fr}
+    .shots{grid-template-columns:1fr}
+    .shots .shot:last-child{max-width:300px;margin:0 auto}
+    .files li{flex-direction:column;gap:2px}
+    .files .n{flex:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="logo">✦</div>
+    <div class="brand">AI 生涯工作台<small>四川大学 · 人工智能学院 · 2026 级</small></div>
+    <div class="spacer"></div>
+    <div class="chip"><i></i>离线可用</div>
+  </header>
+
+  <div class="hero">
+    <h1>把四年规划，<br>拆成<em>今天就能动手的一步</em></h1>
+    <p>四年路线、12 个月计划、项目阶梯与自评打卡，都在一个页面里。</p>
+    <div class="actions">
+      <a class="btn primary" href="workbench.html">▶ 立即打开工作台</a>
+      <a class="btn ghost" href="#shots">先看效果</a>
+    </div>
+    <div class="meta">
+      <span>无需安装</span><span>不联网</span><span>进度只存本机</span><span>首屏约 3.6 MB</span>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="ico">🗺️</div>
+      <h3>四年一张图</h3>
+      <p>学期主线、关键节点、竞赛与进组时机，一眼看清<b>下一步做什么</b>。</p>
+    </div>
+    <div class="card">
+      <div class="ico">🎯</div>
+      <h3>本周只做 3 件事</h3>
+      <p>每个目标都拆到可执行的小任务，打卡即更新进度，不做无效努力。</p>
+    </div>
+    <div class="card">
+      <div class="ico">🔒</div>
+      <h3>进度不离开你的电脑</h3>
+      <p>数据只存本机浏览器，可一键导出 JSON，<b>换设备也不丢</b>。</p>
+    </div>
+  </div>
+
+  <section class="blk" id="shots">
+    <div class="head">
+      <h2>先看效果</h2>
+      <span class="note">点击图片可放大</span>
+    </div>
+    <div class="shots">
+      <a class="shot" href="shot-desktop.png">
+        <img src="shot-desktop.png" alt="驾驶舱界面">
+        <div class="cap">驾驶舱 · 当前学期、12 个月计划、项目阶梯与本周作战</div>
+      </a>
+      <a class="shot phone" href="shot-mobile.png">
+        <img src="shot-mobile.png" alt="手机窄屏界面">
+        <div class="cap">手机窄屏 · 自动堆叠，随手查看</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="head"><h2>三步就能用</h2></div>
+    <div class="steps">
+      <div class="step">
+        <h4>打开</h4>
+        <p>点「立即打开工作台」，直接进入驾驶舱，无需注册登录。</p>
+      </div>
+      <div class="step">
+        <h4>打卡</h4>
+        <p>在「本周作战」里勾选完成项，进度自动保存在本机。</p>
+      </div>
+      <div class="step">
+        <h4>换设备</h4>
+        <p>导出 JSON → 在别的电脑导入，进度无缝继续。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="head"><h2>还有几个问题</h2></div>
+    <details>
+      <summary>需要联网吗？要装什么吗？</summary>
+      <div class="body"><p>都不用。整个工作台是一个自包含的单文件网页，样式、数据、学院资料 PDF 全部内联，断网也能正常使用。</p></div>
+    </details>
+    <details>
+      <summary>我的打卡记录存在哪里？</summary>
+      <div class="body"><p>只存你自己浏览器的 <code>localStorage</code> 里，不上传、不联网。清空浏览器数据前记得先导出备份。</p></div>
+    </details>
+    <details>
+      <summary>换电脑 / 换浏览器怎么办？</summary>
+      <div class="body"><p>用工作台里的「导出 JSON」，在新设备上「导入 JSON」即可，进度和历史打卡都会一起带过去。</p></div>
+    </details>
+    <details>
+      <summary>这是怎么做的？</summary>
+      <div class="body"><p>纯前端单文件实现：全部样式、数据与逻辑内联在一个 HTML 中，无框架、无后端、无外部请求；进度用浏览器本地存储，可导出 JSON 迁移。</p></div>
+    </details>
+  </section>
+
+  <footer>
+    <b>AI 生涯工作台</b> · 四川大学人工智能学院 2026 级<br>
+    纯前端单文件 · 无后端 · 无外部依赖 · 进度只存本机
+  </footer>
+</div>
+</body>
+</html>
