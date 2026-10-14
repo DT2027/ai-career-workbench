@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -257,5 +257,19 @@
     纯前端单文件 · 无后端 · 无外部依赖 · 进度只存本机
   </footer>
 </div>
+
+<script>
+  /* 工作台首屏约 3.6 MB，点击后给一个明确的加载反馈 */
+  document.querySelectorAll('a.btn.primary').forEach(function (a) {
+    a.addEventListener('click', function () {
+      a.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite">◐</span> 正在加载工作台…';
+      a.style.pointerEvents = 'none';
+      setTimeout(function () { a.innerHTML = '▶ 立即打开工作台'; a.style.pointerEvents = ''; }, 15000);
+    });
+  });
+  var st = document.createElement('style');
+  st.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+  document.head.appendChild(st);
+</script>
 </body>
 </html>
